@@ -44,6 +44,9 @@ Ensure you have the following installed:
 4. Set up environment variables:
    Replace `.env-example` to `.env` and configure the variable
 
+5. Set up database:
+   Create new database `auth_db` or anything else based on `DB_NAME` in `.env` file.
+
 ### Running the App
 
 1. Start the development server:
