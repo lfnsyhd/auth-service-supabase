@@ -1,4 +1,4 @@
-# Authentication Service - React.js
+# Authentication Service - Node.js
 
 This repository contains an authentication service built using Node.js. It provides a scalable and secure solution for user authentication, supporting features like user registration, login, get profile and token-based session management.
 
@@ -55,7 +55,7 @@ Ensure you have the following installed:
    http://localhost:5008
    ```
 
-2. Documentation API link:
+2. For the purpose of API documentation, here is the link:
    ```
    http://localhost:5008/api-docs
    ```
