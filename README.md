@@ -55,9 +55,14 @@ Ensure you have the following installed:
    http://localhost:5008
    ```
 
-2. For the purpose of API documentation, here is the link:
+3. For the purpose of API documentation, here is the link:
    ```
    http://localhost:5008/api-docs
+   ```
+
+4. Test the authService:
+   ```
+   npm test
    ```
 
 ---
