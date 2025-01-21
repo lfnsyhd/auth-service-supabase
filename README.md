@@ -46,8 +46,9 @@ Ensure you have the following installed:
 
 5. Set up database:
    Create new database `auth_jwt_db` in postgresql based on `DB_NAME` in `.env` file.
-   For example and running purpose, this project already including dumped postgre sql file named `public.sql`
-   Import that into `auth_jwt_db`
+
+6. Import database (optional):
+   For example and running purpose, this project already including dumped postgre sql file named `public.sql` and import it into `auth_jwt_db` database.
 
 ### Running the App
 
