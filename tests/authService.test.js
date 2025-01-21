@@ -5,33 +5,37 @@ const { faker } = require('@faker-js/faker');
 
 describe('Auth Routes', () => {
   describe('POST /auth/register', () => {
-    let dynamicUsername;
+    let dynamicEmail, dynamicName;
 
     beforeEach(() => {
-      dynamicUsername = faker.internet.username();
+      dynamicEmail = faker.internet.email();
+      dynamicName = faker.internet.displayName();
     });
 
     it('should register a new user successfully', async () => {
       const response = await request.post('/auth/register').send({
-        username: dynamicUsername,
+        name: dynamicName,
+        email: dynamicEmail,
         password: 'Password@123'
       });
 
       expect(response.status).toBe(201);
       expect(response.body.message).toBe('User created');
       expect(response.body.user).toHaveProperty('id');
-      expect(response.body.user).toHaveProperty('username', dynamicUsername);
+      expect(response.body.user).toHaveProperty('email', dynamicEmail);
       expect(response.body.user).not.toHaveProperty('password');
     });
 
     it('should return error when user already exists', async () => {
       await request.post('/auth/register').send({
-        username: dynamicUsername,
+        name: dynamicName,
+        email: dynamicEmail,
         password: 'Password@123'
       });
 
       const response = await request.post('/auth/register').send({
-        username: dynamicUsername,
+        name: dynamicName,
+        email: dynamicEmail,
         password: 'Password@123'
       });
 
@@ -41,14 +45,16 @@ describe('Auth Routes', () => {
   });
 
   describe('POST /auth/login', () => {
-    let dynamicUsername;
+    let dynamicEmail, dynamicName;
     let token;
 
     beforeEach(async () => {
-      dynamicUsername = faker.internet.username();
+      dynamicEmail = faker.internet.email();
+      dynamicName = faker.internet.displayName();
 
       const registerResponse = await request.post('/auth/register').send({
-        username: dynamicUsername,
+        name: dynamicName,
+        email: dynamicEmail,
         password: 'Password@123'
       });
 
@@ -56,7 +62,7 @@ describe('Auth Routes', () => {
       expect(registerResponse.body.message).toBe('User created');
 
       const loginResponse = await request.post('/auth/login').send({
-        username: dynamicUsername,
+        email: dynamicEmail,
         password: 'Password@123'
       });
 
@@ -72,7 +78,7 @@ describe('Auth Routes', () => {
 
     it('should return error when logging in with incorrect credentials', async () => {
       const response = await request.post('/auth/login').send({
-        username: dynamicUsername,
+        email: dynamicEmail,
         password: 'wrongpassword'
       });
 
@@ -82,19 +88,21 @@ describe('Auth Routes', () => {
   });
 
   describe('GET /auth/profile', () => {
-    let dynamicUsername;
+    let dynamicEmail, dynamicName;
     let token;
 
     beforeEach(async () => {
-      dynamicUsername = faker.internet.username();
+      dynamicEmail = faker.internet.email();
+      dynamicName = faker.internet.displayName();
 
       const registerResponse = await request.post('/auth/register').send({
-        username: dynamicUsername,
+        name: dynamicName,
+        email: dynamicEmail,
         password: 'Password@123'
       });
 
       const loginResponse = await request.post('/auth/login').send({
-        username: dynamicUsername,
+        email: dynamicEmail,
         password: 'Password@123'
       });
 
@@ -108,7 +116,7 @@ describe('Auth Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body.user).toHaveProperty('id');
-      expect(response.body.user).toHaveProperty('username', dynamicUsername);
+      expect(response.body.user).toHaveProperty('email', dynamicEmail);
       expect(response.body.user).not.toHaveProperty('password');
     });
 

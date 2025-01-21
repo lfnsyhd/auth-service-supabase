@@ -1,6 +1,6 @@
 // routes/authRoutes.js
 const express = require('express');
-const { register, login, profile } = require('../controllers/authController');
+const { register, login, profile, detail, list } = require('../controllers/authController');
 const authenticateJWT = require('../middlewares/authMiddleware');
 
 const router = express.Router();
@@ -25,15 +25,18 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               name:
  *                 type: string
- *                 description: The username of the new user
+ *                 description: The name of the new user
  *               email:
  *                 type: string
  *                 description: The email of the new user
  *               password:
  *                 type: string
  *                 description: The password of the new user
+ *               role:
+ *                 type: string
+ *                 description: The role of the new user, must be user or admin
  *     responses:
  *       201:
  *         description: Successfully created user
@@ -57,9 +60,9 @@ router.post('/register', register);
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               email:
  *                 type: string
- *                 description: The username of the user
+ *                 description: The email of the user
  *               password:
  *                 type: string
  *                 description: The password of the user
@@ -90,5 +93,8 @@ router.post('/login', login);
  *         description: Server error
  */
 router.get('/profile', authenticateJWT, profile);
+
+router.get('/detail/:id', authenticateJWT, detail);
+router.get('/list', authenticateJWT, list);
 
 module.exports = router;

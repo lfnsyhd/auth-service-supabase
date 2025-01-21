@@ -1,12 +1,12 @@
 # Authentication Service - Node.js
 
-This repository contains an authentication service built using Node.js. It provides a scalable and secure solution for user authentication, supporting features like user registration, login, get profile and token-based session management.
+This repository contains an authentication service built using Node.js. It provides a scalable and secure solution for user authentication, supporting features like user registration, login, get profile, list all users, and token-based session management.
 
 ---
 
 ## Features
 
-- **User Registration**: Allow new users to register with username and password.
+- **User Registration**: Allow new users to register with name, email and password.
 - **User Login**: Authenticate users with their credentials.
 - **Get Profile**: Getting the profile info for authenticated profile.
 - **Token-Based Authentication**: Use JWT (JSON Web Tokens) for secure session management.
@@ -45,7 +45,9 @@ Ensure you have the following installed:
    Replace `.env-example` to `.env` and configure the variable
 
 5. Set up database:
-   Create new database `auth_db` or anything else based on `DB_NAME` in `.env` file.
+   Create new database `auth_jwt_db` in postgresql based on `DB_NAME` in `.env` file.
+   For example and running purpose, this project already including dumped postgre sql file named `public.sql`
+   Import that into `auth_jwt_db`
 
 ### Running the App
 
