@@ -31,7 +31,7 @@ Ensure you have the following installed:
 
 2. Navigate to the project directory:
    ```bash
-   cd authentication-service
+   cd authentication-service-gefami
    ```
 
 3. Install dependencies:
