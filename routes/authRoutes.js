@@ -1,7 +1,13 @@
 // routes/authRoutes.js
-const express = require('express');
-const { register, login, profile, detail, list } = require('../controllers/authController');
-const authenticateJWT = require('../middlewares/authMiddleware');
+import express from 'express';
+import {
+  register,
+  login,
+  profile,
+  detail,
+  list,
+} from '../controllers/authController.js';
+import authenticateJWT from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -97,4 +103,4 @@ router.get('/profile', authenticateJWT, profile);
 router.get('/detail/:id', authenticateJWT, detail);
 router.get('/list', authenticateJWT, list);
 
-module.exports = router;
+export default router;

@@ -1,7 +1,8 @@
-const supertest = require('supertest');
-const app = require('../server');
+import supertest from 'supertest';
+import app from '../server.js';
+import { faker } from '@faker-js/faker';
+
 const request = supertest(app);
-const { faker } = require('@faker-js/faker');
 
 describe('Auth Routes', () => {
   describe('POST /auth/register', () => {
@@ -83,7 +84,7 @@ describe('Auth Routes', () => {
       });
 
       expect(response.status).toBe(400);
-      expect(response.body.message).toBe('Invalid password');
+      expect(response.body.message).toBe('Invalid login credentials');
     });
   });
 
