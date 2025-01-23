@@ -46,7 +46,7 @@ export const registerUser = async (name, email, password, role = 'user') => {
     ])
     .select('*')
     .single();
-  
+
   console.log('Insert response:', { profile, insertError });
 
   if (insertError) {
@@ -62,6 +62,9 @@ export const findUserByEmail = async (email) => {
 };
 
 export const loginUser = async (email, password) => {
+  if (!email) throw new Error('Email is required');
+  if (!password) throw new Error('Password is required');
+
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -80,10 +83,10 @@ export const loginUser = async (email, password) => {
 
 export const getUserProfile = async (userId) => {
   const { data, error } = await supabase
-                          .from('profiles')
-                          .select('*')
-                          .eq('user_id', userId)
-                          .single();
+    .from('profiles')
+    .select('*')
+    .eq('user_id', userId)
+    .single();
 
   if (error) {
     throw new Error("Failed to fetch user: " + error.message);
@@ -95,9 +98,9 @@ export const getUserProfile = async (userId) => {
 
 export const getAllUser = async () => {
   const { data, error } = await supabase
-                          .from('profiles')
-                          .select('*')
-                          .eq('role', 'user');
+    .from('profiles')
+    .select('*')
+    .eq('role', 'user');
 
   if (error) {
     throw error;
